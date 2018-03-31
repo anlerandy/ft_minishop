@@ -16,7 +16,7 @@ require $_SERVER["DOCUMENT_ROOT"] . "/includes/database/users.php";
 </head>
 <body>
 <?php
-	require_once $_SERVER["DOCUMENT_ROOT"] . "includes/menu.html";
+	require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/menu.html";
 ?>
 </body>
 </html>
