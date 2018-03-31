@@ -12,7 +12,7 @@
 	else
 	{
 		$sql = "CREATE DATABASE IF NOT EXISTS minishop";
-		if (mysqli_slect_db($conn, $mydb))
+		if (mysqli_select_db($conn, $mydb))
 			echo "Databse Minishop Already exist";
 		else if (mysqli_query($conn, $sql))
 			echo "Database Minishop created successfully";
