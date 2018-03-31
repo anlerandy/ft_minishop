@@ -1,8 +1,8 @@
 <?php
-	require "includes/database/users.php";
-	require "includes/database/items.php";
-	require "includes/database/categories.php";
-	require "includes/database/baskets.php";
+	require "/includes/database/users.php";
+	require "/includes/database/items.php";
+	require "/includes/database/categories.php";
+	require "/includes/database/baskets.php";
 
 	// Connect to the SQL server
 	$db = mysqli_connect($db_server, $db_user, $db_password);

@@ -6,9 +6,10 @@ function create_user_table($db)
 	if (!mysqli_query($db,
 		"CREATE TABLE IF NOT EXISTS users (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-			name TEXT,
+			name varchar(255) NOT NULL UNIQUE,
 			password TEXT,
-			admin BOOLEAN
+			admin BOOLEAN,
+			UNIQUE (name)
 		)"
 	))
 		exit ("ERROR: " . mysqli_error($db));

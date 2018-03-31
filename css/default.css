@@ -1,0 +1,49 @@
+html
+{
+	font-family : verdana, sans-serif;
+}
+
+body
+{
+	margin:0;
+	padding:0;
+	margin-left:2vw;
+	margin-right:2vw;
+}
+
+a
+{
+	color: white;
+	padding:10px;
+	text-align:center;
+	text-decoration:none;
+	text-align:center;
+}
+
+a:hover
+{
+	color:dimgray;
+	background:white;
+}
+
+div a
+{
+	display:flex;
+	flex : auto;
+}
+
+nav div
+{
+	display:flex;
+	flex : auto;
+	background:black;
+	text-align:center;
+}
+
+#log
+{
+	text-align:center;
+	margin-top:30vh;
+	padding:30px;
+	background:deepskyblue;
+} #log input {border-radius:15px; outline:none;}
