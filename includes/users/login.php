@@ -19,46 +19,48 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/menu.html";
 
 // Récupération des valeurs passées en paramêtres. Et Création du Nouvel User.
 
-if (isset($_POST['login']) && isset($_POST['pass']) && isset($_POST['npass']))
+if (isset($_POST['login']) && isset($_POST['pass']))
 {
-	if ($_POST['login'] !== "" && $_POST['pass'] !== "" && $_POST['npass'] !== "")
+	if ($_POST['login'] !== "" && $_POST['pass'] !== "")
 	{
-		if ($_POST['pass'] == $_POST['npass'])
+		$pass = hash("sha512", $_POST['pass']);
+		$requete_get_log = mysqli_prepare($db, "SELECT name, password FROM users WHERE name=? AND password=?");
+		mysqli_stmt_bind_param($requete_get_log, "ss", $_POST['login'], $pass);
+		if (mysqli_stmt_execute($requete_get_log))
 		{
-			$pass = hash("sha512", $_POST['pass']);
-			$requete_new_user = mysqli_prepare($db, "INSERT INTO users (id, name, password, admin) VALUES (null, ?, ?, '0')");
-			mysqli_stmt_bind_param($requete_new_user, "ss", $_POST['login'], $pass);
-			mysqli_stmt_execute($requete_new_user);
-			if (mysqli_stmt_error($requete_new_user))
-				$err = -1;
+			mysqli_stmt_bind_result($requete_get_log, $name, $pass);
+			while(mysqli_stmt_fetch($requete_get_log))
+				$tab[$pass] = $name;
+			if(!isset($tab))
+				$npass = 1;
 			else
 			{
-				$_SESSION['logged_in_user'] = $_POST['login'];
-				mysqli_stmt_close($requete_new_user);
-				mysqli_close($db);
+				$_SESSION['logged_in_user'] = $tab[$pass];
 				header('Location: /');
 			}
 		}
 		else
-			$npass = -1;
+			$err = 1;
 	}
+	else
+		$npass = 1;
 }
 
 ?>
 <body>
-	<form id="log" method="POST" action="signin.php">
-	Inscription :<br/>
+	<form id="log" method="POST" action="login.php">
+	Connexion :<br/>
 
 
 <?php
 // Affiche Les erreurs liée aux connection.
 if (isset($npass))
 {
-	echo "<br/>Tapez exactement le même mot de passe.";
+	echo "<br/>Le mot de passe ou l'utilisateur est incorrect.";
 }
 if (isset($err))
 {
-	echo "<br/>Error: " . mysqli_stmt_error($requete_new_user);
+	echo "<br/>Error: " . mysqli_error($query);
 }
 ?>
 <br/>
@@ -68,7 +70,6 @@ if (isset($_POST['login'])){echo $_POST['login'];}
 ?>
 ><br />
 	Mot de passe: <input type="password" name="pass" placeholder="Votre mot de passe"><br />
-	Confirmer le mot de passe: <input type="password" name="npass" placeholder="retapez votre mot de passe"><br />
 	<button type="submit" name="submit" value="OK">Connexion</button>
 	</form>
 </body>
