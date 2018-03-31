@@ -8,7 +8,7 @@
 
 
 
-	// Create the database if it doesn't exist already
+	// Select or create the database
 	if (!mysqli_select_db($db, $db_name))
 	{
 		// Create the database
@@ -16,6 +16,10 @@
 			echo "Database \"" . $db_name . "\" created successfully<br />";
 		else
 			exit ("ERROR: " . mysqli_error($db));
+
+		// Select the database
+		if (!mysqli_select_db($db, $db_name))
+			exit ("ERROR: " . mysqli_connect_error());
 	}
 	else
 		echo "Database \"" . $db_name . "\" already exists<br />";
