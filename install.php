@@ -2,13 +2,12 @@
 	require "includes/database/users.php";
 	require "includes/database/items.php";
 	require "includes/database/categories.php";
+	require "includes/database/baskets.php";
 
 	// Connect to the SQL server
 	$db = mysqli_connect($db_server, $db_user, $db_password);
 	if (!$db)
 		exit ("ERROR: " . mysqli_connect_error());
-
-
 
 	// Select or create the database
 	if (!mysqli_select_db($db, $db_name))
@@ -30,6 +29,7 @@
 	create_user_table($db);
 	create_item_table($db);
 	create_category_table($db);
+	create_basket_table($db);
 
 	// Disconnect from the database
 	mysqli_close($db);
