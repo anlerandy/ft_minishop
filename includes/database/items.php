@@ -5,7 +5,8 @@ function create_item_table($db)
 		"CREATE TABLE IF NOT EXISTS items (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			name TEXT,
-			categories TEXT
+			categories TEXT,
+			price DECIMAL(10, 2)
 		)"
 	))
 		exit ("ERROR: " . mysqli_error($db));
