@@ -1,5 +1,6 @@
 <?php
 	require "includes/database/users.php";
+	require "includes/database/items.php";
 
 	// Connect to the SQL server
 	$db = mysqli_connect($db_server, $db_user, $db_password);
@@ -26,6 +27,7 @@
 
 	// Create tables
 	create_user_table($db);
+	create_item_table($db);
 
 	// Disconnect from the database
 	mysqli_close($db);
