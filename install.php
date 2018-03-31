@@ -1,25 +1,28 @@
 <?php
-	$server = "localhost";
-	$user = "root";
-	$password = "alerandy";
-	$mydb = "minishop";
+	require "includes/database/users.php";
 
-	$conn = mysqli_connect($server, $user, $password);
-	if (!$conn)
+	// Connect to the SQL server
+	$db = mysqli_connect($db_server, $db_user, $db_password);
+	if (!$db)
+		exit ("ERROR: " . mysqli_connect_error());
+
+
+
+	// Create the database if it doesn't exist already
+	if (!mysqli_select_db($db, $db_name))
 	{
-		echo "ERROR\n". mysqli_connect_error();
+		// Create the database
+		if (mysqli_query($db, "CREATE DATABASE " . $db_name))
+			echo "Database \"" . $db_name . "\" created successfully<br />";
+		else
+			exit ("ERROR: " . mysqli_error($db));
 	}
 	else
-	{
-		$sql = "CREATE DATABASE IF NOT EXISTS minishop";
-		if (mysqli_select_db($conn, $mydb))
-			echo "Databse Minishop Already exist";
-		else if (mysqli_query($conn, $sql))
-			echo "Database Minishop created successfully";
-		else
-		{
-			echo "ERROR\n". mysqli_error($conn);
-			exit (1);
-		}
-	}
+		echo "Database \"" . $db_name . "\" already exists<br />";
+
+	// Create tables
+	create_user_table($db);
+
+	// Disconnect from the database
+	mysqli_close($db);
 ?>
