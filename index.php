@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "/includes/database/users.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/includes/database/users.php";
 	// Connect to the SQL server
 	$db = mysqli_connect($db_server, $db_user, $db_password);
 	if (!$db)
@@ -16,7 +16,7 @@ require "/includes/database/users.php";
 </head>
 <body>
 <?php
-	require_once "includes/menu.html";
+	require_once $_SERVER["DOCUMENT_ROOT"] . "includes/menu.html";
 ?>
 </body>
 </html>

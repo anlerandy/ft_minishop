@@ -1,5 +1,5 @@
 <?php
-require_once "/includes/database/config.php";;
+require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/database/config.php";
 
 function create_user_table($db)
 {
