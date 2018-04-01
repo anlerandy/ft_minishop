@@ -87,4 +87,50 @@ function query_item($id)
 
 	return ["name" => $item_name, "categories" => $item_categories, "image" => $item_image, "price" => $item_price];
 }
+
+function query_all_items()
+{
+	require $_SERVER["DOCUMENT_ROOT"] . "/includes/database/config.php";
+
+	// Connect to the SQL server
+	$db = mysqli_connect($db_server, $db_user, $db_password);
+	if (!$db)
+	{
+		header("Location: /includes/error.php?error=connection_to_database_failed_" . $db_server . $db_user . $db_password);
+		exit (1);
+	}
+
+	// Select the item database
+	if (!mysqli_select_db($db, $db_name))
+	{
+		header("Location: /includes/error.php?error=database_selection_failed");
+		exit (1);
+	}
+
+	$query = mysqli_query($db, "SELECT * FROM items");
+	if (!$query)
+	{
+		header("Location: /includes/error.php?error=query_failed");
+		exit (1);
+	}
+
+	// Fetch the items
+	$items = [];
+	while ($item = mysqli_fetch_assoc($query))
+	{
+		if (!isset($item["image"]))
+			$item["image"] = "https://abtsmoodle.org/abtslebanon.org/wp-content/uploads/2017/10/image_unavailable.jpg";
+
+		$items[] = $item;
+	}
+
+	// Disconnect from the SQL server
+	if (!mysqli_close($db))
+	{
+		header("Location: /includes/error.php?error=database_closing_failed");
+		exit (1);
+	}
+
+	return $items;
+}
 ?>

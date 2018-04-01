@@ -1,10 +1,5 @@
 <?php
 	session_start();
-
-	require $_SERVER["DOCUMENT_ROOT"] . "/includes/database/items.php";
-
-	// !!!
-	$_SESSION["basket"] = [0 => 1, 1 => 1, 2 => 2];
 ?>
 
 <!DOCTYPE html>
@@ -14,48 +9,46 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="/css/default.css" />
 		<title>Minishop - Mon panier</title>
-		<style>
-			#chosen-items {
-				display:flex;
-			}
-
-			.chosen-item {
-				width: 200px;
-				background: lightgray;
-				margin: 5px;
-				display:flex;
-				flex-direction: column;
-			}
-
-			.chosen-item img {
-				max-width: 100%;
-			}
-
-			.chosen-item b {
-				text-align: center;
-			}
-		</style>
 	</head>
 
 	<body>
 		<?php require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/menu.html"; ?>
 
-		<!-- List of chosen items -->
-		<div id="chosen-items">
-			<?php
-				foreach ($_SESSION["basket"] as $id => $quantity)
-				{
-					$item = query_item($id);
-			?>
-				<div class="chosen-item">
-					<img src="https://image.afcdn.com/recipe/20161130/34577_w600.jpg" />
-					<b><?php echo $item["name"] ?></b> <br />
-					item price <br />
-					item number <br />
-				</div>
-			<?php } ?>
-		</div>
+		<?php if (isset($_SESSION["basket"])) { ?>
+			<!-- List of chosen items -->
+			<div id="chosen-items">
+				<?php
+					require $_SERVER["DOCUMENT_ROOT"] . "/includes/database/items.php";
+					$basket = isset($_SESSION["basket"]) ? $_SESSION["basket"] : []; // Use an empty array is no basket exists yet
+					foreach ($basket as $id => $quantity)
+					{
+						$item = query_item($id);
+				?>
+						<div class="chosen-item">
+							<?php echo "<img src=\"" . $item["image"] . "\" />"; ?>
+							<b><?php echo $item["name"] ?></b> <br />
+							<?php echo $item["price"] ?> &euro; <br />
+							Quantit&eacute;: <?php echo $quantity ?> <br />
+						</div>
+				<?php } ?>
+			</div>
 
-		<!-- Validation button -->
+			<?php if (isset($_SESSION["logged_in_user"])) { ?>
+				<!-- Validation button -->
+				<form action="/includes/validate_command.php">
+					<input type="submit" name="validate" value="Valider la commande">
+				</form>
+
+				<!-- Archiving button -->
+				<form action="/includes/archive_basket.php">
+					<input type="submit" name="archive" value="Archiver mon panier">
+				</form>
+			<?php } else { ?>
+				<b><a href="/includes/users/signin.php">Inscrivez-vous pour commander ou archiver votre panier !</a></b>
+			<?php } ?>
+		<?php } else { ?>
+			Vous n'avez aucun produit dans votre panier. <br />
+			<b><a href="/includes/products.php">Cliquez ici pour choisir des produits !</a></b>
+		<?php } ?>
 	</body>
 </html>
