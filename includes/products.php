@@ -34,18 +34,27 @@
 			<?php
 				require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/database/items.php";
 				$items = query_all_items();
-				foreach ($items as $item) {
+				if (count($items))
+				{
+					foreach ($items as $item)
+					{
 			?>
-				<div class="chosen-item">
-					<?php echo "<img src=\"" . $item["image"] . "\" />"; ?>
-					<b><?php echo $item["name"] ?></b> <br />
-					<?php echo $item["price"] ?> &euro; <br />
+					<div class="chosen-item">
+						<?php echo "<img src=\"" . $item["image"] . "\" />"; ?>
+						<b><?php echo $item["name"] ?></b> <br />
+						<?php echo $item["price"] ?> &euro; <br />
 
-					<!-- Button to add to basket -->
-					<form action="#" method="post">
-						<button name="item" value=<?= $item["id"] ?>>Ajouter au panier</button>
-					</form>
-				</div>
+						<!-- Button to add to basket -->
+						<form action="#" method="post">
+							<button name="item" value=<?= $item["id"] ?>>Ajouter au panier</button>
+						</form>
+					</div>
+			<?php
+					}
+				}
+				else {
+			?>
+					Nous sommes d&eacute;sol&eacute;s, il n'y a aucun produit en stock pour le moment.
 			<?php } ?>
 		</div>
 	</body>
