@@ -57,7 +57,7 @@ function show_prod($column, $filter, $order)
   $err = 1;
   if (isset($npass))
   {
-    echo "Une erreur est survenue lors du chargement des produits...<br/>".mysqli_error($db);
+    echo "Il n'y a auncun élément à afficher.<br/>".mysqli_error($db);
     return(0);
   }
   echo "

@@ -17,17 +17,6 @@ exit ("ERROR: " . mysqli_connect_error());
 // Create the database if it doesn't exist already
 if (!mysqli_select_db($db, $db_name))
 header('Location: /includes/_install.php');
-
-//take the categorie
-$requete_get_cat = mysqli_prepare($db, "SELECT * FROM categories WHERE 1");
-if (mysqli_stmt_execute($requete_get_cat))
-{
-  mysqli_stmt_bind_result($requete_get_cat, $id, $name);
-  while(mysqli_stmt_fetch($requete_get_cat))
-  $tab[$id] = $name ;
-}
-if (!isset($tab))
-$tab = array();
 ?>
 <html>
 <head>
@@ -39,28 +28,26 @@ $tab = array();
   require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/menu.html";
 
   // Petite vérification de ce qui se trouve dans nos deux arrays
-  if (isset($_GET) && isset($_GET['name']))
+  if (isset($_GET) && isset($_GET['name']) && $_GET['name'] !== "")
   {
-    if ($_GET['image'] == "")
-      unset($_GET['image']);
-    if (!($requete_ins = mysqli_prepare($db, "INSERT INTO items (id, name, categories, image, price) VALUES (null, ?, ?, ?, ?)")))
+    if (!($requete_ins = mysqli_prepare($db, "INSERT INTO categories (id, name) VALUES (null, ?)")))
       exit ("Err02".mysqli_error($db));
-    mysqli_stmt_bind_param($requete_ins, "ssss", $_GET['name'], $_GET['cat'], $_GET['image'], $_GET['price']);
+    mysqli_stmt_bind_param($requete_ins, "s", $_GET['name']);
     if (!mysqli_stmt_execute($requete_ins))
       $err01 = 1;
     else
     {
-      $tmp = mysqli_prepare($db, "SELECT id FROM items WHERE name=?");
+      $tmp = mysqli_prepare($db, "SELECT id FROM categories WHERE name=?");
       mysqli_stmt_bind_param($tmp, "s", $_GET['name']);
       if (mysqli_stmt_execute($tmp))
       {
         mysqli_stmt_bind_result($tmp, $id);
         while (mysqli_stmt_fetch($tmp))
         {
-          printf("%s\n", $id);
+          $id = $id;
         }
       }
-     header("Location: /includes/admin/?produit=$id");
+    header("Location: /includes/admin/?categorie=$id");
     }
   }
   ?>
@@ -74,14 +61,8 @@ $tab = array();
     </div>
     <div id="frame">
       <div id="add_container">
-        <form method="GET" action="new_prod.php">
+        <form method="GET" action="new_cat.php">
           Name : <input name="name" />
-          Image : <input name="image"/>
-          Catégories :<br/>
-          <?php foreach($tab as $key => $val): ?>
-            <input type="checkbox" name="cat[]" value=<?=$val?>><?=$val?></input>
-          <?php endforeach; ?>
-          Prix : <input name="price" />
           <button name="redirect" value="">Créer</button>
         </form>
         <?php if(isset($err01))

@@ -31,10 +31,6 @@ header('Location: /includes/_install.php');
 	require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/menu.html";
 
 	// Petite vérification de ce qui se trouve dans nos deux arrays
-	if (isset($_GET))
-		print_r($_GET);
-	if (isset($_POST))
-		print_r($_POST);
 	?>
 	<div id="wrap">
 		<div id="sidebar">
@@ -51,11 +47,15 @@ header('Location: /includes/_install.php');
 				if (isset($_GET['p']) || isset($_GET['categorie']) || isset($_GET['produit']))
 				{
 								if (isset($_GET['p']) && $_GET['p'] === 'cat')
+								{
+									echo "<div  id=\"container\"><h2>Liste des catégories :</h2>";
+									echo "<form method=\"GET\" action=\"/includes/database/new_cat.php\"><button id=\"none\"> Créer une nouvelle catégorie</button></form>";
 									show_cat_all();
+								}
 								if (isset($_GET['p']) && $_GET['p'] === 'prod')
 								{
 							  	echo "<div  id=\"container\"><h2>Liste des articles :</h2>";
-									echo "<form method=\"GET\" action=\"/includes/database/new_prod.php\"><button id=\"none\"> Créer un noueau produit</button></form>";
+									echo "<form method=\"GET\" action=\"/includes/database/new_prod.php\"><button id=\"none\"> Créer un nouveau produit</button></form>";
 									show_prod(NULL, NULL, NULL);
 								}
 								if (isset($_GET['categorie']))

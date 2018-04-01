@@ -20,7 +20,7 @@ if (isset($_SESSION['level_user']) && $_SESSION['level_user'] === '1' && isset($
   if (mysqli_stmt_execute($requete_del))
   {
     echo key($_GET)." : ".$_GET[key($_GET)]." a bien été supprimé.<br/>Redirection...";
-  	header( "refresh:2;url=".$_POST['redirect']);
+  	header( "refresh:1;url=".$_POST['redirect']);
   }
   else
   $err = 1;

@@ -32,7 +32,7 @@ else
 $npass = 1;
 if (isset($npass))
 {
-  echo "Une erreur est survenue lors du chargement des catégories...";
+  echo "Il n'y a aucun élément à afficher...";
   return(0);
 }
 echo "
@@ -41,8 +41,7 @@ echo "
   <meta charset=\"UTF-8\" />
   <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/default.css\" />
 </head>
-<body>
-  <div  id=\"container\"><h2>Liste des catégories :</h2>";
+<body>";
     foreach($tab as $id => $item)
         echo "<a href=\"?categorie=".$id."\"><span>ID : ".$id." | </span><span>"." "."Nom de la catégorie : ".$item."</span></a><br/>";
   echo "</div>

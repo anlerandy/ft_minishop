@@ -120,6 +120,15 @@ nav
 	flex-wrap: wrap;
 }
 
+#add_container form
+{
+	display: flex;
+	flex:auto;
+	flex-direction: column;
+	justify-content: space-between;
+	margin:30px;
+} #add_container form input {margin:10px;}
+
 #wrap
 {
 	display:flex;
