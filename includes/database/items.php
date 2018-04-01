@@ -25,7 +25,7 @@ function query_item($id)
 		exit (1);
 	}
 
-	// Select the item database
+	// Select the minishop database
 	if (!mysqli_select_db($db, $db_name))
 	{
 		header("Location: /includes/error.php?error=database_selection_failed");
@@ -101,7 +101,7 @@ function query_all_items()
 		exit (1);
 	}
 
-	// Select the item database
+	// Select the minishop database
 	if (!mysqli_select_db($db, $db_name))
 	{
 		header("Location: /includes/error.php?error=database_selection_failed");
