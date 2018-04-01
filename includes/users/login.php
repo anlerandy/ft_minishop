@@ -24,15 +24,16 @@ if (isset($_POST['login']) && isset($_POST['pass']))
 	if ($_POST['login'] !== "" && $_POST['pass'] !== "")
 	{
 		$pass = hash("sha512", $_POST['pass']);
-		$requete_get_log = mysqli_prepare($db, "SELECT name, password, admin FROM users WHERE name=? AND password=?");
+		$requete_get_log = mysqli_prepare($db, "SELECT id, name, password, admin FROM users WHERE name=? AND password=?");
 		mysqli_stmt_bind_param($requete_get_log, "ss", $_POST['login'], $pass);
 		if (mysqli_stmt_execute($requete_get_log))
 		{
-			mysqli_stmt_bind_result($requete_get_log, $name, $pass, $admin);
+			mysqli_stmt_bind_result($requete_get_log, $id, $name, $pass, $admin);
 			while(mysqli_stmt_fetch($requete_get_log))
 			{
 				$tab[$pass][] = $name;
 				$tab[$pass][] = $admin;
+				$tab[$pass][] = $id;
 			}
 			if(!isset($tab))
 			$npass = 1;
@@ -40,6 +41,7 @@ if (isset($_POST['login']) && isset($_POST['pass']))
 			{
 				$_SESSION['logged_in_user'] = $tab[$pass][0];
 				$_SESSION['level_user'] = sprintf($tab[$pass][1]);
+				$_SESSION['user_id'] = sprintf($tab[$pass][2]);
 				header('Location: /');
 			}
 		}

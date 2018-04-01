@@ -33,15 +33,28 @@ if (isset($_POST['login']) && isset($_POST['pass']) && isset($_POST['npass']))
 				$err = -1;
 			else
 			{
+				$requete_get_log = mysqli_prepare($db, "SELECT id, name FROM users WHERE name=?");
+				mysqli_stmt_bind_param($requete_get_log, "s", $_POST['login']);
+				if (mysqli_stmt_execute($requete_get_log))
+				{
+					mysqli_stmt_bind_result($requete_get_log, $id, $name);
+					while(mysqli_stmt_fetch($requete_get_log))
+					{
+						$tab[$name][] = $id;
+					}
 				$_SESSION['logged_in_user'] = $_POST['login'];
 				$_SESSION['level_user'] = 0;
+				$_SESSION['user_id'] = $id;
 				mysqli_stmt_close($requete_new_user);
 				mysqli_close($db);
 				header('Location: /');
+				}
 			}
 		}
-		else
-			$npass = -1;
+	}
+	else
+	{
+		$npass = -1;
 	}
 }
 
