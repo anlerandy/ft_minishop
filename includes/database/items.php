@@ -90,7 +90,7 @@ function query_item($id)
 	return ["name" => $item_name, "categories" => $item_categories, "image" => $item_image, "price" => $item_price];
 }
 
-function query_all_items()
+function query_all_items($order)
 {
 	require $_SERVER["DOCUMENT_ROOT"] . "/includes/database/config.php";
 
@@ -109,7 +109,7 @@ function query_all_items()
 		exit (1);
 	}
 
-	$query = mysqli_query($db, "SELECT * FROM items");
+	$query = mysqli_query($db, "SELECT * FROM items " . $order);
 	if (!$query)
 	{
 		header("Location: /includes/error.php?error=query_failed");

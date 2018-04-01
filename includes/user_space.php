@@ -27,7 +27,6 @@
 		?>
 				<div class="archived-basket">
 					<img src="https://www.ldoceonline.com/media/english/illustration/basket.jpg" alt="Panier">
-					DATE
 					<form action="/includes/unarchive_basket.php" method="post">
 						<button type="submit" name="basket_id" value=<?=$basket["id"]?>>Recharger ce panier</button>
 					</form>

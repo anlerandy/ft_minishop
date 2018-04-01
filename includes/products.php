@@ -33,7 +33,7 @@
 		<div id="chosen-items">
 			<?php
 				require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/database/items.php";
-				$items = query_all_items();
+				$items = query_all_items("");
 				if (count($items))
 				{
 					if (isset($_GET["category"]))
