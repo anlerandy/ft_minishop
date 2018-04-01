@@ -13,5 +13,11 @@ function create_user_table($db)
 		)"
 	))
 		exit ("ERROR: " . mysqli_error($db));
+		$pass = hash("sha512", "admin");
+		$requete_new_user = mysqli_prepare($db, "INSERT INTO users (id, name, password, admin) VALUES (null, 'admin', ?, '1')");
+		mysqli_stmt_bind_param($requete_new_user, "s", $pass);
+		mysqli_stmt_execute($requete_new_user);
+		if (mysqli_stmt_error($requete_new_user))
+			echo " : Admin already set";
 }
 ?>

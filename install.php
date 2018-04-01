@@ -26,10 +26,16 @@
 		echo "Database \"" . $db_name . "\" already exists<br />";
 
 	// Create tables
+	echo "Installation des tables :<br/>Utilisateurs";
 	create_user_table($db);
+	echo " : Ok<br/>Produits";
 	create_item_table($db);
+	echo " : Ok<br/>Catégories";
 	create_category_table($db);
+	echo " : Ok<br/>Paniers";
 	create_basket_table($db);
+	echo " : Ok<br/><br/>Redirection...";
+	header( "refresh:5;url=/" );
 
 	// Disconnect from the database
 	mysqli_close($db);

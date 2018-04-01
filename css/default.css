@@ -13,11 +13,27 @@ body
 
 a
 {
-	color: white;
-	padding:10px;
 	text-align:center;
 	text-decoration:none;
-	text-align:center;
+}
+
+nav a
+{
+		color: white;
+			padding:10px;
+}
+
+#container a
+{
+	width:100%;
+	padding:10px;
+	color:black;
+	display: flex;
+}
+
+button:hover
+{
+	background:aqua;border-radius:15px;
 }
 
 a:hover
@@ -26,18 +42,44 @@ a:hover
 	background:white;
 }
 
-div a
+
+nav form{
+	margin: 5px;
+	margin-left : 10px;
+	margin-right: 10px;
+}
+
+nav button, nav input{
+	border-radius:15px;
+	margin-left : 10px;
+	margin-right: 10px;
+}
+
+nav a, div form, div form input
 {
 	display:flex;
-	flex : auto;
+	flex:auto;
+	flex-wrap:wrap;
+	flex-direction:column;
+}
+
+div form, div form input
+{
+	flex-direction: row;
 }
 
 nav div
 {
 	display:flex;
-	flex : auto;
+	flex:auto;
+	flex-wrap:wrap;
+}
+
+nav
+{
+	display:flex;
 	background:black;
-	text-align:center;
+	flex-wrap:wrap;
 }
 
 #log
@@ -46,4 +88,36 @@ nav div
 	margin-top:30vh;
 	padding:30px;
 	background:deepskyblue;
-} #log input {border-radius:15px; outline:none;}
+	} #log input, nav input {border-radius:15px; outline:none;padding:3px;font-size:1em}
+
+#sidebar
+{
+	margin : 2vh 2vw;
+	height:70vh;
+	width:20vw;
+	text-align:center;
+	background : dimgrey;
+}
+
+#frame
+{
+	margin : 2vh 2vw;
+	height:52vh;
+	width:100vw;
+	background: grey;
+	padding-left : 2vw;
+	padding-right : 2vw;
+	border-radius:45px 0 0 45px;
+	overflow:auto;
+}
+
+#container
+{
+	height:50%;
+	background: grey;
+} #container img {max-width: 300px;max-height: 300px;}
+
+#wrap
+{
+	display:flex;
+}

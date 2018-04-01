@@ -34,6 +34,7 @@ if (isset($_POST['login']) && isset($_POST['pass']) && isset($_POST['npass']))
 			else
 			{
 				$_SESSION['logged_in_user'] = $_POST['login'];
+				$_SESSION['level_user'] = 0;
 				mysqli_stmt_close($requete_new_user);
 				mysqli_close($db);
 				header('Location: /');
@@ -69,7 +70,7 @@ if (isset($_POST['login'])){echo $_POST['login'];}
 ><br />
 	Mot de passe: <input type="password" name="pass" placeholder="Votre mot de passe"><br />
 	Confirmer le mot de passe: <input type="password" name="npass" placeholder="retapez votre mot de passe"><br />
-	<button type="submit" name="submit" value="OK">Connexion</button>
+	<button type="submit" name="submit" value="OK">Inscrition</button>
 	</form>
 </body>
 </html>

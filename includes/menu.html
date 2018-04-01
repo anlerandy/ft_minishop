@@ -1,26 +1,33 @@
 <nav>
-	<div>
-		<a href="#">Home</a>
+	<div style="width:50vw">
+		<a href="/">Home</a>
 		<a href="#">Produits</a>
 		<a href="#">Panier</a>
 	</div>
 	<div>
 		<?php
-			if (!isset($_SESSION['logged_in_user']))
+		if (!isset($_SESSION['logged_in_user']))
+		{
+			echo "
+			<form method=\"POST\" action=\"/includes/users/login.php\">
+				<input name=\"login\" placeholder=\"Votre login\" />
+				<input name=\"pass\" placeholder=\"Votre mot de passe\" type=\"password\" />
+				<button name=\"submit\">Se connecter</button>
+			</form>
+			<a href=\"/includes/users/signin.php\">S'inscrire</a>";
+		}
+		else
+		{
+			echo "
+			<a href=\"\">Bonjour ".$_SESSION['logged_in_user'].",</a>";
+			if (isset($_SESSION['level_user']) && $_SESSION['level_user'] === '1')
 			{
 				echo "
-		<a href=\"/includes/users/login.php\">Se connecter</a>
-		<a href=\"/includes/users/signin.php\">S'inscrire</a>";
+				<a href=\"/includes/admin/\">Administration</a>";
 			}
-			else
-			{
-				if (isset($_SESSION['logged_in_user']))
-	 {
-				echo "
-		<a href=\"\">".$_SESSION[logged_in_user]."</a>
-		<a href=\"/includes/users/logout.php\">Se déconnecter</a>";
-	 }
-			}
+			echo "
+			<a href=\"/includes/users/logout.php\">Se déconnecter</a>";
+		}
 		?>
 	</div>
 </nav>
