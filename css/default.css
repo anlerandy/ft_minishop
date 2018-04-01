@@ -7,8 +7,6 @@ body
 {
 	margin:0;
 	padding:0;
-	margin-left:2vw;
-	margin-right:2vw;
 }
 
 a
@@ -41,7 +39,6 @@ a:hover
 	color:dimgray;
 	background:white;
 }
-
 
 nav form{
 	margin: 5px;
@@ -79,6 +76,7 @@ nav
 {
 	display:flex;
 	background:black;
+	margin-bottom:2%;
 	flex-wrap:wrap;
 }
 
@@ -92,18 +90,17 @@ nav
 
 #sidebar
 {
-	margin : 2vh 2vw;
-	height:70vh;
+	height:auto;
 	width:20vw;
-	text-align:center;
 	background : dimgrey;
-}
+	border-radius:0 45px 45px 0;
+}	#sidebar a {padding:2%;flex-direction: column;display:flex;flex:auto;color:black;}
 
 #frame
 {
-	margin : 2vh 2vw;
 	height:52vh;
 	width:100vw;
+	margin-left:5vw;
 	background: grey;
 	padding-left : 2vw;
 	padding-right : 2vw;
@@ -113,9 +110,16 @@ nav
 
 #container
 {
-	height:50%;
 	background: grey;
-} #container img {max-width: 300px;max-height: 300px;}
+} #container img {max-width: 200px;max-height: 200px;}
+
+#prod_container
+{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
 
 #wrap
 {

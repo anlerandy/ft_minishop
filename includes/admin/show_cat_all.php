@@ -42,7 +42,7 @@ echo "
   <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/default.css\" />
 </head>
 <body>
-  <div  id=\"container\"><h2>Liste des Catégorie :</h2>";
+  <div  id=\"container\"><h2>Liste des catégories :</h2>";
     foreach($tab as $id => $item)
         echo "<a href=\"?categorie=".$id."\"><span>ID : ".$id." | </span><span>"." "."Nom de la catégorie : ".$item."</span></a><br/>";
   echo "</div>

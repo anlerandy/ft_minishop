@@ -14,7 +14,7 @@ function show_prod($column, $filter, $order)
   // Récupération des Produits selon les filtres et ordres.
   if (isset($column) && isset($filter))
   {
-    $filter = sprintf("SELECT * FROM items WHEN %s=%s", $column, $filter);
+    $filter = sprintf("SELECT * FROM items WHERE %s=%s", $column, $filter);
   }
   else
   {
@@ -27,12 +27,16 @@ function show_prod($column, $filter, $order)
     if (isset($filter) && isset($column))
     sprintf("%s %s", $filter, $column);
     else
-    $filter = sprintf("SELECT * FROM items %s", $order);
+    $filter = sprintf("SELECT * FROM items '%s'", $order);
   }
   else if (!isset($filter))
-  $filter = "SELECT * FROM items";
+    $filter = "SELECT * FROM items";
 
-  $requete_get_prod = mysqli_prepare($db, $filter);
+  if (!($requete_get_prod = mysqli_prepare($db, $filter)))
+    {
+      echo "<br/>".mysqli_error($db);
+      exit(0);
+    }
   if (mysqli_stmt_execute($requete_get_prod))
   {
     mysqli_stmt_bind_result($requete_get_prod, $id, $name, $categories, $img, $price);
@@ -46,14 +50,14 @@ function show_prod($column, $filter, $order)
         "img" => $img,
         "price" => $price];
     }
-    if(!isset($tab))
+    if (!isset($tab))
     $npass = 1;
   }
   else
   $err = 1;
   if (isset($npass))
   {
-    echo "Une erreur est survenue lors du chargement des produits...";
+    echo "Une erreur est survenue lors du chargement des produits...<br/>".mysqli_error($db);
     return(0);
   }
   echo "
@@ -63,10 +67,11 @@ function show_prod($column, $filter, $order)
   <link rel=\"stylesheet\" type=\"text/css\" href=\"/css/default.css\" />
   </head>
   <body>
-  <div  id=\"container\"><h2>Liste des articles :</h2>";
+  <div id=\"prod_container\">";
   foreach($tab as $id => $item)
-    echo "<a href=\"?produit=\""
-        .key(array_keys($tab)).
+  {
+    echo "<a href=\"?produit="
+        .sprintf($id).
         "\"><img src=\""
         .$item['img'].
         "\"/><br/><b>"
@@ -74,11 +79,12 @@ function show_prod($column, $filter, $order)
         "</b><br/>"
         .$item['price'].
         "€</a><br/>";
+      }
   echo "
   </div>
   </body>
   </html>
   ";
-
+  return ($tab);
 };
 ?>

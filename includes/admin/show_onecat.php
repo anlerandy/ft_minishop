@@ -52,6 +52,9 @@ echo "
   <input placeholder=\"Nouveau nom de catégorie. P. Ex. : ".$name."\" name=\"newname\" />
   <button name=\"submit\" value=\"submited\">Nouveau nom</button>
   </form>
+<form method=\"POST\" action=\"delete.php?categorie=".$id."\">
+<button name=\"submit\" value=\"submited\">Supprimer la catégorie</button>
+</form>
     </div><hr/>
 </body>
 </html>

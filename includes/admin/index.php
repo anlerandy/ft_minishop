@@ -48,14 +48,34 @@ header('Location: /includes/_install.php');
 				<?php
 
 				// Vérification des arrays pour set une page grâce aux fonctions.
-				if (isset($_GET['p']) || isset($_GET['categorie']))
+				if (isset($_GET['p']) || isset($_GET['categorie']) || isset($_GET['produit']))
 				{
 								if (isset($_GET['p']) && $_GET['p'] === 'cat')
 									show_cat_all();
 								if (isset($_GET['p']) && $_GET['p'] === 'prod')
+								{
+							  	echo "<div  id=\"container\"><h2>Liste des articles :</h2>";
+									echo "<form method=\"GET\" action=\"/includes/database/new_prod.php\"><button id=\"none\" > Créer un noueau produit</button></form>";
 									show_prod(NULL, NULL, NULL);
+								}
 								if (isset($_GET['categorie']))
 									show_onecat($_GET['categorie']);
+								if (isset($_GET['produit']))
+								{
+							  	echo "<div  id=\"container\"><h2>Modifier l'article :</h2>";
+									$tab = show_prod('id', $_GET['produit'], NULL);
+									echo "<h4>ID de l'article : ".$_GET['produit']."</h4><br/>
+								  <form method=\"POST\" action=\"index.php?produit=".$_GET['produit']."\">
+								  <input placeholder=\"Nouveau nom de l'article P. Ex. : ".$tab[$_GET['produit']]['name']."\" name=\"newname\" />
+								  <input placeholder=\"Nouveau prix\" name=\"price\" />
+								  <input placeholder=\"Nouvel url image P. Ex. : ".$tab[$_GET['produit']]['img']."\" name=\"image\" />
+								  <button name=\"submit\" value=\"submited\">Nouveau nom</button>
+								  </form>
+								<form method=\"POST\" action=\"delete.php?categorie=".$_GET['produit']."\">
+								<button name=\"submit\" value=\"submited\">Supprimer le produit</button>
+								</form>
+								    </div><hr/>";
+								}
 				}
 				else
 				 	echo "Bienvenue sur la page d'admin : ".$_SESSION['logged_in_user'].",<br/>Sélectionner les éléments que vous voulez modifier.";
