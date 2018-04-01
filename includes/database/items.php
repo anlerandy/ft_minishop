@@ -33,7 +33,7 @@ function query_item($id)
 	}
 
 	// Prepare the query
-	$query = mysqli_prepare($db, "SELECT name FROM items WHERE id=?");
+	$query = mysqli_prepare($db, "SELECT name, categories, image, price FROM items WHERE id=?");
 	if (!$query)
 	{
 		header("Location: /includes/error.php?error=query_preparation_failed");
@@ -55,7 +55,7 @@ function query_item($id)
 	}
 
 	// Bind the results
-	if (!mysqli_stmt_bind_result($query, $item_name))
+	if (!mysqli_stmt_bind_result($query, $item_name, $item_categories, $item_image, $item_price))
 	{
 		header("Location: /includes/error.php?error=bind_result_failed");
 		exit (1);
@@ -82,6 +82,6 @@ function query_item($id)
 		exit (1);
 	}
 
-	return ["name" => $item_name];
+	return ["name" => $item_name, "categories" => $item_categories, "image" => $item_image, "price" => $item_price];
 }
 ?>
