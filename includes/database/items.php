@@ -64,6 +64,7 @@ function query_item($id)
 	// Get the results
 	if (!mysqli_stmt_fetch($query))
 	{
+		unset($_SESSION);
 		header("Location: /includes/error.php?error=query_fetching_failed");
 		exit (1);
 	}
