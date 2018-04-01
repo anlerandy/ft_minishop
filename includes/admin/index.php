@@ -55,7 +55,7 @@ header('Location: /includes/_install.php');
 								if (isset($_GET['p']) && $_GET['p'] === 'prod')
 								{
 							  	echo "<div  id=\"container\"><h2>Liste des articles :</h2>";
-									echo "<form method=\"GET\" action=\"/includes/database/new_prod.php\"><button id=\"none\" > Créer un noueau produit</button></form>";
+									echo "<form method=\"GET\" action=\"/includes/database/new_prod.php\"><button id=\"none\"> Créer un noueau produit</button></form>";
 									show_prod(NULL, NULL, NULL);
 								}
 								if (isset($_GET['categorie']))
@@ -65,14 +65,14 @@ header('Location: /includes/_install.php');
 							  	echo "<div  id=\"container\"><h2>Modifier l'article :</h2>";
 									$tab = show_prod('id', $_GET['produit'], NULL);
 									echo "<h4>ID de l'article : ".$_GET['produit']."</h4><br/>
-								  <form method=\"POST\" action=\"index.php?produit=".$_GET['produit']."\">
+								  <form method=\"POST\" action=\"index.php?items=".$_GET['produit']."\">
 								  <input placeholder=\"Nouveau nom de l'article P. Ex. : ".$tab[$_GET['produit']]['name']."\" name=\"newname\" />
 								  <input placeholder=\"Nouveau prix\" name=\"price\" />
 								  <input placeholder=\"Nouvel url image P. Ex. : ".$tab[$_GET['produit']]['img']."\" name=\"image\" />
 								  <button name=\"submit\" value=\"submited\">Nouveau nom</button>
 								  </form>
-								<form method=\"POST\" action=\"delete.php?categorie=".$_GET['produit']."\">
-								<button name=\"submit\" value=\"submited\">Supprimer le produit</button>
+								<form method=\"POST\" action=\"/includes/database/delete.php?items=".$_GET['produit']."\">
+								<button name=\"redirect\" value=\"".$_SERVER['PHP_SELF']."\">Supprimer le produit</button>
 								</form>
 								    </div><hr/>";
 								}
