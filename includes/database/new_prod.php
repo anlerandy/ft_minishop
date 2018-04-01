@@ -43,6 +43,8 @@ $tab = array();
   {
     if ($_GET['image'] == "")
       unset($_GET['image']);
+    if (isset($_GET['cat']) && $_GET['cat'] != "")
+      $_GET['cat'] = base64_encode(serialize($_GET['cat']));
     if (!($requete_ins = mysqli_prepare($db, "INSERT INTO items (id, name, categories, image, price) VALUES (null, ?, ?, ?, ?)")))
       exit ("Err02".mysqli_error($db));
     mysqli_stmt_bind_param($requete_ins, "ssss", $_GET['name'], $_GET['cat'], $_GET['image'], $_GET['price']);

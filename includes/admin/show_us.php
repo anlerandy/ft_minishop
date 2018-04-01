@@ -54,10 +54,11 @@ echo "
         }
         echo"</span></a><br/>";
         if ($_SESSION['user_id'] !== $val[2])
+      {
         echo "
       <form method=\"POST\" action=\"/includes/database/delete.php?users=".$val[2]."\">
       <button name=\"redirect\" value=\"".$_SERVER['PHP_SELF']."\">Supprimer l'utilisateur</button>
-      </form>";
+      </form>";}
       }
   echo "</div>
 </body>
