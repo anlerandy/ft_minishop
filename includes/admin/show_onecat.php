@@ -48,12 +48,12 @@ echo "
       echo "<h1>Modifier la catégorie : ".$name."</h1>";
   if(isset($tab))
       echo "<h4>ID de la catégorie : ".$id."</h4><br/>
-  <form method=\"POST\" action=\"index.php?categorie=".$id."\">
+  <form method=\"POST\" action=\"index.php?categories=".$id."\">
   <input placeholder=\"Nouveau nom de catégorie. P. Ex. : ".$name."\" name=\"newname\" />
   <button name=\"submit\" value=\"submited\">Nouveau nom</button>
   </form>
-<form method=\"POST\" action=\"delete.php?categorie=".$id."\">
-<button name=\"submit\" value=\"submited\">Supprimer la catégorie</button>
+<form method=\"POST\" action=\"/includes/database/delete.php?categories=".$id."\">
+<button name=\"redirect\" value=\"".$_SERVER['PHP_SELF']."\">Supprimer la catégorie</button>
 </form>
     </div><hr/>
 </body>
