@@ -36,7 +36,7 @@ if (isset($_POST['login']) && isset($_POST['pass']))
 				$tab[$pass][] = $id;
 			}
 			if(!isset($tab))
-			$npass = 1;
+				$npass = 1;
 			else
 			{
 				$_SESSION['logged_in_user'] = $tab[$pass][0];
