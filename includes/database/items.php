@@ -82,6 +82,9 @@ function query_item($id)
 		exit (1);
 	}
 
+	if (!isset($item_image))
+		$item_image = "https://abtsmoodle.org/abtslebanon.org/wp-content/uploads/2017/10/image_unavailable.jpg";
+
 	return ["name" => $item_name, "categories" => $item_categories, "image" => $item_image, "price" => $item_price];
 }
 ?>
