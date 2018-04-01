@@ -7,7 +7,8 @@ require $_SERVER["DOCUMENT_ROOT"] . "/includes/database/users.php";
 		exit ("ERROR: " . mysqli_connect_error());
 	// Create the database if it doesn't exist already
 	if (!mysqli_select_db($db, $db_name))
-		header('Location: /includes/_install.php');
+	{		header('Location: /includes/_install.php');
+	exit(0);}
 ?>
 <html>
 <head>
