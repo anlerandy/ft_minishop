@@ -80,6 +80,7 @@ if (isset($_POST['login']) && isset($_POST['pass']))
 		><br />
 		Mot de passe: <input type="password" name="pass" placeholder="Votre mot de passe"><br />
 		<button type="submit" name="submit" value="OK">Connexion</button>
+		<a href="signin.php" style="font-size:12px;border-radius:15px;">S'inscrire</a>
 	</form>
 </body>
 </html>
