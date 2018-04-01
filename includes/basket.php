@@ -1,7 +1,7 @@
 <?php
 	session_start();
 
-	require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/database/items.php";
+	require $_SERVER["DOCUMENT_ROOT"] . "/includes/database/items.php";
 
 	// !!!
 	$_SESSION["basket"] = [0 => 1, 1 => 1, 2 => 2];
@@ -12,6 +12,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="/css/default.css" />
 		<title>Minishop - Mon panier</title>
 		<style>
 			#chosen-items {
@@ -37,6 +38,8 @@
 	</head>
 
 	<body>
+		<?php require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/menu.html"; ?>
+
 		<!-- List of chosen items -->
 		<div id="chosen-items">
 			<?php
