@@ -5,7 +5,7 @@ function create_item_table($db)
 		"CREATE TABLE IF NOT EXISTS items (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			name varchar(255) UNIQUE,
-			categories BLOB,
+			categories TEXT,
 			image TEXT,
 			price DECIMAL(10, 2)
 		)"
@@ -68,6 +68,7 @@ function query_item($id)
 		header("Location: /includes/error.php?error=query_fetching_failed");
 		exit (1);
 	}
+	$item_categories = unserialize(base64_decode($item_categories));
 
 	// Close the query
 	if (!mysqli_stmt_close($query))
@@ -121,6 +122,11 @@ function query_all_items()
 	{
 		if (!isset($item["image"]))
 			$item["image"] = "https://abtsmoodle.org/abtslebanon.org/wp-content/uploads/2017/10/image_unavailable.jpg";
+
+		if ($item["categories"] !== null)
+			$item["categories"] = unserialize(base64_decode($item["categories"]));
+		else
+			$item["categories"] = [];
 
 		$items[] = $item;
 	}
