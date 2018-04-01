@@ -19,7 +19,7 @@
 		else
 		{
 			echo "
-			<a href=\"\">Bonjour ".$_SESSION['logged_in_user'].",</a>";
+			<a href=\"/includes/user_space.php\">Bonjour ".$_SESSION['logged_in_user']."</a>";
 			if (isset($_SESSION['level_user']) && $_SESSION['level_user'] === '1')
 			{
 				echo "

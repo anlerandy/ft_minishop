@@ -156,3 +156,10 @@ nav
 .chosen-item b {
 	text-align: center;
 }
+
+
+/* Archived baskets */
+
+.archived-basket img {
+	width: 200px;
+}
