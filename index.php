@@ -17,7 +17,7 @@ require $_SERVER["DOCUMENT_ROOT"] . "/includes/database/users.php";
 <body>
 	<?php require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/menu.html"; ?>
 
-	// List of a few random items
+	<!-- List of a few random items -->
 	<div id="chosen-items">
 		<?php
 			require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/database/items.php";
