@@ -45,13 +45,13 @@ $tab = array();
       unset($_GET['image']);
 	if (isset($_GET['cat']) && $_GET['cat'] != "")
 	{
-		require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/database/items.php";
-		$item_id = item_name_to_id($_GET['cat']);
-	    $item_id = base64_encode(serialize($item_id));
+		// require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/database/items.php";
+		// $_GET['cat'] = item_name_to_id($_GET['cat']);
+	    $_GET['cat'] = base64_encode(serialize($_GET['cat']));
 	}
     if (!($requete_ins = mysqli_prepare($db, "INSERT INTO items (id, name, categories, image, price) VALUES (null, ?, ?, ?, ?)")))
       exit ("Err02".mysqli_error($db));
-    mysqli_stmt_bind_param($requete_ins, "ssss", $_GET['name'], $item_id, $_GET['image'], $_GET['price']);
+    mysqli_stmt_bind_param($requete_ins, "ssss", $_GET['name'], $_GET['cat'], $_GET['image'], $_GET['price']);
     if (!mysqli_stmt_execute($requete_ins))
       $err01 = 1;
     else
