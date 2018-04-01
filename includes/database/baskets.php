@@ -50,7 +50,6 @@ function archive_basket($status)
 
 	// Bind the parameters
 	$serialized_items = base64_encode(serialize($_SESSION["basket"]));
-	$_SESSION["user_id"] = 1; // !!! PLACEHOLDER
 	if (!mysqli_stmt_bind_param($query, "iss", $_SESSION["user_id"], $serialized_items, $status))
 	{
 		header("Location: /includes/error.php?error=bind_param_failed");
@@ -107,7 +106,6 @@ function query_archived_baskets()
 	}
 
 	// Bind the parameters
-	$_SESSION["user_id"] = 1; // !!! PLACEHOLDER
 	if (!mysqli_stmt_bind_param($query, "i", $_SESSION["user_id"]))
 	{
 		header("Location: /includes/error.php?error=bind_param_failed");
