@@ -18,7 +18,8 @@ function archive_basket($status)
 {
 	require $_SERVER["DOCUMENT_ROOT"] . "/includes/database/config.php";
 
-	if (!(isset($_SESSION["basket"]) && isset($_SESSION["logged_in_user"]) && isset($_SESSION["user_id"])))
+	// if (!(isset($_SESSION["basket"]) && isset($_SESSION["logged_in_user"]) && isset($_SESSION["user_id"])))
+	if (!(isset($_SESSION["basket"]) && isset($_SESSION["logged_in_user"])))
 	{
 		header("Location: /includes/error.php?error=invalid_archiving_form");
 		exit (1);
@@ -49,6 +50,7 @@ function archive_basket($status)
 
 	// Bind the parameters
 	$serialized_items = serialize($_SESSION["basket"]);
+	$_SESSION["user_id"] = 1; // !!! PLACEHOLDER
 	if (!mysqli_stmt_bind_param($query, "ids", $_SESSION["user_id"], $serialized_items, $status))
 	{
 		header("Location: /includes/error.php?error=bind_param_failed");
