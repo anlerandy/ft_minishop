@@ -8,6 +8,7 @@ function create_basket_table($db)
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			user INT UNSIGNED,
 			items BLOB,
+			status TEXT
 		)"
 	))
 		exit ("ERROR: " . mysqli_error($db));
