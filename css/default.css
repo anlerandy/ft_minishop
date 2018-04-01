@@ -125,3 +125,26 @@ nav
 {
 	display:flex;
 }
+
+
+/* Products in the basket */
+
+#chosen-items {
+	display:flex;
+}
+
+.chosen-item {
+	width: 200px;
+	background: lightgray;
+	margin: 5px;
+	display:flex;
+	flex-direction: column;
+}
+
+.chosen-item img {
+	max-width: 100%;
+}
+
+.chosen-item b {
+	text-align: center;
+}
