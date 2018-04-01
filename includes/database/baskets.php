@@ -7,7 +7,7 @@ function create_basket_table($db)
 		"CREATE TABLE IF NOT EXISTS baskets (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			user INT UNSIGNED,
-			items TEXT
+			items BLOB,
 		)"
 	))
 		exit ("ERROR: " . mysqli_error($db));

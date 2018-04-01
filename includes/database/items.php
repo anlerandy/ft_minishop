@@ -5,7 +5,7 @@ function create_item_table($db)
 		"CREATE TABLE IF NOT EXISTS items (
 			id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			name varchar(255) UNIQUE,
-			categories TEXT,
+			categories BLOB,
 			image TEXT,
 			price DECIMAL(10, 2)
 		)"
