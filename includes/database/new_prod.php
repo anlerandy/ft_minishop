@@ -26,6 +26,8 @@ header('Location: /includes/_install.php');
     while(mysqli_stmt_fetch($requete_get_cat))
       $tab[$id] = $name ;
   }
+  if (!isset($tab))
+  $tab = array();
 ?>
 <html>
 <head>
@@ -40,12 +42,14 @@ header('Location: /includes/_install.php');
 	// Petite vérification de ce qui se trouve dans nos deux arrays
 if (isset($_POST))
 {
-  $_POST['cat'] = serialize($_POST['cat']);
-    if (!($requete_ins = mysqli_prepare($db, "INSERT INTO items (id, name, categories, image, price) VALUES (null, ?, ?, ?, ?)")))
-      exit (mysqli_error($db));
-    mysqli_stmt_bind_param($requete_ins, "ssss", $_POST['name'], $_POST['cat'], $_POST['image'], $_POST['price']);
+  if (isset($_POST['cat']))
+  {
+    $_POST['cat'] = serialize($_POST['cat']);
+      if (!($requete_ins = mysqli_prepare($db, "INSERT INTO items (id, name, categories, image, price) VALUES (null, ?, ?, ?, ?)")))
+        exit (mysqli_error($db));
+        mysqli_stmt_bind_param($requete_ins, "ssss", $_POST['name'], $_POST['cat'], $_POST['image'], $_POST['price']);
   if (mysqli_stmt_execute($requete_ins))
-    echo mysqli_stmt_error($requete_ins);
+        echo mysqli_stmt_error($requete_ins);
   else
   {
     mysqli_prepare($db, ($tmp = sprintf("SELECT id FROM items WHERE name=%s", $_POST['name'])));
@@ -56,6 +60,7 @@ if (isset($_POST))
       $id = $name;
     }
     header("Location: /includes/admin/?produit=".$id);
+  }
   }
 }
 	?>
